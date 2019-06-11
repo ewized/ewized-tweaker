@@ -1,0 +1,31 @@
+{
+  "id": "@VERSION@-ewized",
+  "inheritsFrom": "@VERSION@",
+  "jar": "@VERSION@",
+  "time": "@TIMESTAMP@",
+  "releaseTime": "@TIMESTAMP@",
+  "type": "release",
+  "mainClass": "net.minecraft.launchwrapper.Launch",
+  "arguments": {
+    "game": [
+        "--tweakClass",
+        "com.ewized.minecraft.launch.EwizedClientTweaker"
+      ]
+  },
+  "libraries": [
+    {
+      "name": "net.year4000.utilities:core:master-SNAPSHOT",
+      "url": "https://jitpack.io/"
+    },
+    {
+      "name": "untitled:untitled:latest"
+    },
+    {
+      "name": "net.minecraft:launchwrapper:1.12"
+    },
+    {
+      "name": "org.ow2.asm:asm-all:5.2",
+      "url": "http://repo.liteloader.com/"
+    }
+  ]
+}

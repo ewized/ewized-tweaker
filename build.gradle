@@ -1,0 +1,49 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://files.minecraftforge.net/maven' }
+    }
+    dependencies {
+        classpath 'com.github.Chocohead:ForgeGradle:moderniser-SNAPSHOT'
+    }
+}
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+apply plugin: 'net.minecraftforge.gradle.tweaker-client'
+
+group 'com.ewized'
+version '1.0-SNAPSHOT'
+
+defaultTasks 'asemble'
+
+sourceCompatibility = 1.8
+
+minecraft {
+    version = '1.14.2'
+    mappings = 'snapshot_20190601'
+    runDir = 'run'
+    tweakClass = 'com.ewized.EwizedTweaker'
+}
+
+repositories {
+    mavenCentral()
+    // Used for Utilities
+    maven { url 'https://www.jitpack.io' }
+    // Used for launch wrapper and libs for Minecraft
+    maven { url 'https://libraries.minecraft.net'}
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'net.year4000.utilities:core-ducktape:master-SNAPSHOT'
+    compile 'net.year4000.utilities:core-scheduler:master-SNAPSHOT'
+    compile 'net.year4000.utilities:core-minecraft:master-SNAPSHOT'
+    compile 'net.year4000.utilities:core:master-SNAPSHOT'
+    compile 'net.minecraft:launchwrapper:1.12'
+    compile 'com.google.inject:guice:4.0'
+    compile group: 'org.apache.logging.log4j', name: 'log4j', version: '2.8.1'
+}
