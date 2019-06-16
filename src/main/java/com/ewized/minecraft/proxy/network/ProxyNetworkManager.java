@@ -9,7 +9,7 @@ import net.year4000.utilities.reflection.annotations.Getter;
 import net.year4000.utilities.reflection.annotations.Invoke;
 import net.year4000.utilities.reflection.annotations.Proxied;
 
-@Proxied("net.minecraft.network.NetworkManager")
+@Proxied("ja") // net.minecraft.network.NetworkManager
 public interface ProxyNetworkManager {
     /** Get the object that this proxy is using */
     Object $this();
@@ -18,6 +18,6 @@ public interface ProxyNetworkManager {
     @Getter(signature = "Lio/netty/channel/Channel;")
     Channel channel();
 
-    @Invoke(signature = "(Lnet/minecraft/network/Packet;)V")
+    @Invoke(signature = "(Lka;)V") // net/minecraft/network/IPacket
     void sendPacket(Object packet);
 }

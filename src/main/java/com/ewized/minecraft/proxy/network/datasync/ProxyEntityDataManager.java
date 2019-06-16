@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReadWriteLock;
 
-@Proxied("net.minecraft.network.datasync.EntityDataManager")
+@Proxied("qk") // net.minecraft.network.datasync.EntityDataManager
 public interface ProxyEntityDataManager {
     /** Get the object that this proxy is using */
     Object $this();

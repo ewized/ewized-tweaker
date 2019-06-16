@@ -11,7 +11,7 @@ import net.year4000.utilities.reflection.annotations.Invoke;
 import net.year4000.utilities.reflection.annotations.Proxied;
 import net.year4000.utilities.reflection.annotations.Static;
 
-@Proxied("net.minecraft.network.EnumPacketDirection")
+@Proxied("kb") // net.minecraft.network.EnumPacketDirection
 public interface ProxyEnumPacketDirection {
     /** Get the static instance of this */
     @Static

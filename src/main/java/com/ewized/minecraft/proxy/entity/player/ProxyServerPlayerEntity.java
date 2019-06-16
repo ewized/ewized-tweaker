@@ -14,7 +14,7 @@ import net.year4000.utilities.reflection.annotations.Getter;
 import net.year4000.utilities.reflection.annotations.Proxied;
 import com.ewized.minecraft.protocol.Packet;
 
-@Proxied("net.minecraft.entity.player.EntityPlayerMP")
+@Proxied("vh") // net.minecraft.entity.player.ServerPlayerEntity
 public interface ProxyServerPlayerEntity extends ProxyEntity {
     /** Create the proxy of the player */
     static ProxyServerPlayerEntity of(Object player) {
@@ -26,7 +26,7 @@ public interface ProxyServerPlayerEntity extends ProxyEntity {
     Object $this();
 
     /** Grabs the current instance of the NetHandlerPlayServer */
-    @Getter(signature = "Lnet/minecraft/network/NetHandlerPlayServer;")
+    @Getter(signature = "Lvy;") // net/minecraft/network/play/ServerPlayNetHandler
     @Bridge(ProxyServerPlayNetHandler.class)
     ProxyServerPlayNetHandler netHandlerPlayServer();
 

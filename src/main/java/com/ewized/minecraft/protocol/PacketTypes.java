@@ -6,7 +6,7 @@ package com.ewized.minecraft.protocol;
 
 import com.google.common.collect.Maps;
 import net.year4000.utilities.Conditions;
-import com.ewized.minecraft.proxy.network.ProxyEnumConnectionState;
+import com.ewized.minecraft.proxy.network.ProxyProtocolType;
 import net.year4000.utilities.utils.UtilityConstructError;
 import net.year4000.utilities.value.Value;
 
@@ -36,8 +36,8 @@ public final class PacketTypes {
     public static Value<Class<?>> fromType(PacketType type) {
         Conditions.nonNull(type, "type");
         try {
-            ProxyEnumConnectionState connectionState = ProxyEnumConnectionState.get();
-            ProxyEnumConnectionState instance = connectionState.value(type.state());
+            ProxyProtocolType connectionState = ProxyProtocolType.get();
+            ProxyProtocolType instance = connectionState.value(type.state());
             Class<?> clazz = instance.packet(type);
             if (clazz != null) {
                 map.put(clazz, type);

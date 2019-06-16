@@ -12,7 +12,7 @@ import net.year4000.utilities.reflection.annotations.Getter;
 import net.year4000.utilities.reflection.annotations.Invoke;
 import net.year4000.utilities.reflection.annotations.Proxied;
 
-@Proxied("net.minecraft.entity.Entity")
+@Proxied("aii") // net.minecraft.entity.Entity
 public interface ProxyEntity {
     static ProxyEntity of(Object entity) {
         Conditions.nonNull(entity, "entity");
@@ -27,7 +27,7 @@ public interface ProxyEntity {
     int entityId();
 
     /** Get the data watcher for the entity */
-    @Getter(signature = "Lnet/minecraft/network/datasync/EntityDataManager;")
+    @Getter(signature = "Lqk;") // net/minecraft/network/datasync/EntityDataManager
     @Bridge(ProxyEntityDataManager.class)
     ProxyEntityDataManager dataManager();
 }

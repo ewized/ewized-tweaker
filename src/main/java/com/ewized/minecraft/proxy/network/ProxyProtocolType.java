@@ -15,18 +15,18 @@ import com.ewized.minecraft.protocol.PacketType;
 
 import java.util.Map;
 
-@Proxied("net.minecraft.network.EnumConnectionState") // net.minecraft.network.EnumConnectionState
-public interface ProxyEnumConnectionState {
+@Proxied("jb") // net/minecraft/network/ProtocolType
+public interface ProxyProtocolType {
     /** Get the proxy for the object */
-    static ProxyEnumConnectionState of(Object object) {
+    static ProxyProtocolType of(Object object) {
         Conditions.nonNull(object, "object");
-        return Gateways.proxy(ProxyEnumConnectionState.class, object);
+        return Gateways.proxy(ProxyProtocolType.class, object);
     }
 
     /** Get the static version of this proxy */
     @Static
-    static ProxyEnumConnectionState get() {
-        return Gateways.proxy(ProxyEnumConnectionState.class);
+    static ProxyProtocolType get() {
+        return Gateways.proxy(ProxyProtocolType.class);
     }
 
     /** Get the object that this proxy is using */
@@ -50,7 +50,7 @@ public interface ProxyEnumConnectionState {
 
     /** Get the enum value by the index */
     @Static
-    default ProxyEnumConnectionState value(int index){
+    default ProxyProtocolType value(int index){
         Object[] values = values();
         Conditions.inRange(index, -1, values.length);
         return of(values[index]);
