@@ -1,6 +1,8 @@
 package com.ewized.minecraft.launch;
 
+import net.minecraft.launchwrapper.IClassTransformer;
 import net.minecraft.launchwrapper.ITweaker;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -54,7 +56,13 @@ public class  EwizedTweaker implements ITweaker {
         this.args.add("--version");
         this.args.add(this.profile);
 
-        return this.args.toArray(new String[]{});
+        try {
+            // Found optifine use that instead
+            this.logger.error(Launch.classLoader.findClass("optifine.OptiFineClassTransformer"));
+            return new String[0];
+        } catch (ClassNotFoundException e) {
+            return this.args.toArray(new String[]{});
+        }
     }
 }
 
