@@ -15,7 +15,7 @@ import com.ewized.minecraft.protocol.PacketType;
 
 import java.util.Map;
 
-@Proxied("net.minecraft.network.EnumConnectionState")
+@Proxied("net.minecraft.network.EnumConnectionState") // net.minecraft.network.EnumConnectionState
 public interface ProxyEnumConnectionState {
     /** Get the proxy for the object */
     static ProxyEnumConnectionState of(Object object) {

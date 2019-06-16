@@ -3,7 +3,6 @@ package com.ewized;
 import com.ewized.minecraft.protocol.PacketListener;
 import com.ewized.minecraft.protocol.PacketTypes;
 import com.ewized.minecraft.protocol.Packets;
-import com.ewized.minecraft.proxy.server.ProxyMinecraftServer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,7 +11,6 @@ public final class EwizedManager implements Ewized {
     private final Logger logger = LogManager.getLogger("ewized");
     private static EwizedManager manager;
     Packets packets;
-    ProxyMinecraftServer minecraftServer;
 
     /** Get the singleton instance of this */
     public static EwizedManager get() {
@@ -25,7 +23,7 @@ public final class EwizedManager implements Ewized {
     /** Only be init by the get methods */
     private EwizedManager() {
         this.packets = Packets.manager(this);
-        this.minecraftServer = null;
+        test();
     }
 
     private void test() {
