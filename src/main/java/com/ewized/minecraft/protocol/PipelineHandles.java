@@ -4,7 +4,7 @@
 
 package com.ewized.minecraft.protocol;
 
-import com.ewized.minecraft.proxy.entity.player.ProxyEntityPlayerMP;
+import com.ewized.minecraft.proxy.entity.player.ProxyServerPlayerEntity;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -58,7 +58,7 @@ final class PipelineHandles {
                 Packet packet = new Packet(packetType.get(), msg);
                 PacketListener listener = manager.getListener(clazz);
                 if (listener != null) {
-                    ProxyEntityPlayerMP player = ctx.channel().attr(PacketManager.PLAYER_KEY).get();
+                    ProxyServerPlayerEntity player = ctx.channel().attr(PacketManager.PLAYER_KEY).get();
                     try {
                         return listener.apply(player, packet);
                     } catch (Exception error) {

@@ -4,7 +4,7 @@
 
 package com.ewized.minecraft.protocol;
 
-import com.ewized.minecraft.proxy.entity.player.ProxyEntityPlayerMP;
+import com.ewized.minecraft.proxy.entity.player.ProxyServerPlayerEntity;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
@@ -18,12 +18,12 @@ public interface Packets {
     }
 
     /** Send the packet to the player */
-    default void sendPacket(ProxyEntityPlayerMP player, Packet packet) {
+    default void sendPacket(ProxyServerPlayerEntity player, Packet packet) {
         sendPacket(ImmutableList.of(player), packet);
     }
 
     /** Send the packet to the set of players */
-    default void sendPacket(Packet packet, ProxyEntityPlayerMP... players) {
+    default void sendPacket(Packet packet, ProxyServerPlayerEntity... players) {
         sendPacket(ImmutableSet.copyOf(players), packet);
     }
 
@@ -34,15 +34,15 @@ public interface Packets {
     }
 
     /** Send the packet to the collection of players */
-    void sendPacket(Collection<ProxyEntityPlayerMP> players, Packet packet);
+    void sendPacket(Collection<ProxyServerPlayerEntity> players, Packet packet);
 
     /** Send the packet with the offset to the player */
-    default void sendPacket(ProxyEntityPlayerMP player, Packet packet, long offset, TimeUnit unit) {
+    default void sendPacket(ProxyServerPlayerEntity player, Packet packet, long offset, TimeUnit unit) {
         sendPacket(ImmutableList.of(player), packet, offset, unit);
     }
 
     /** Send the packet with the offset to the set of players */
-    default void sendPacket(Packet packet, long offset, TimeUnit unit, ProxyEntityPlayerMP... players) {
+    default void sendPacket(Packet packet, long offset, TimeUnit unit, ProxyServerPlayerEntity... players) {
         sendPacket(ImmutableSet.copyOf(players), packet, offset, unit);
     }
 
@@ -54,15 +54,15 @@ public interface Packets {
     }
 
     /** Send the packet with the offset to the collection of players */
-    void sendPacket(Collection<ProxyEntityPlayerMP> players, Packet packet, long offset, TimeUnit unit);
+    void sendPacket(Collection<ProxyServerPlayerEntity> players, Packet packet, long offset, TimeUnit unit);
 
     /** Repeat the packet with the delay to the player */
-    default void repeatPacket(ProxyEntityPlayerMP player, Packet packet, long delay, TimeUnit unit) {
+    default void repeatPacket(ProxyServerPlayerEntity player, Packet packet, long delay, TimeUnit unit) {
         repeatPacket(ImmutableList.of(player), packet, delay, unit);
     }
 
     /** Repeat the packet with the delay to the set of players */
-    default void repeatPacket(Packet packet, long delay, TimeUnit unit, ProxyEntityPlayerMP... players) {
+    default void repeatPacket(Packet packet, long delay, TimeUnit unit, ProxyServerPlayerEntity... players) {
         repeatPacket(ImmutableSet.copyOf(players), packet, delay, unit);
     }
 
@@ -72,7 +72,7 @@ public interface Packets {
     }
 
     /** Repeat the packet with the delay to the collection of players */
-    void repeatPacket(Collection<ProxyEntityPlayerMP> players, Packet packet, long delay, TimeUnit unit);
+    void repeatPacket(Collection<ProxyServerPlayerEntity> players, Packet packet, long delay, TimeUnit unit);
 
     /** Register the consumer for all the players the packet listener */
     void registerListener(PacketType packetType, PacketListener consumer);

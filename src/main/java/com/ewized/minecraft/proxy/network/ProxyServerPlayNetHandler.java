@@ -10,7 +10,7 @@ import net.year4000.utilities.reflection.annotations.Getter;
 import net.year4000.utilities.reflection.annotations.Proxied;
 
 @Proxied("net.minecraft.network.NetHandlerPlayServer")
-public interface ProxyNetHandlerPlayServer {
+public interface ProxyServerPlayNetHandler {
     /** Get the object that this proxy is using */
     Object $this();
 

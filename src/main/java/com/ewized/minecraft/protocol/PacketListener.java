@@ -4,12 +4,12 @@
 
 package com.ewized.minecraft.protocol;
 
-import com.ewized.minecraft.proxy.entity.player.ProxyEntityPlayerMP;
+import com.ewized.minecraft.proxy.entity.player.ProxyServerPlayerEntity;
 
 import java.util.function.BiFunction;
 
 @FunctionalInterface
-public interface PacketListener extends BiFunction<ProxyEntityPlayerMP, Packet, Boolean> {
+public interface PacketListener extends BiFunction<ProxyServerPlayerEntity, Packet, Boolean> {
     /** Should the event be ignored, this leaves the packet to be handled normally */
     boolean IGNORE = false;
 
@@ -18,5 +18,5 @@ public interface PacketListener extends BiFunction<ProxyEntityPlayerMP, Packet, 
 
     /** Return true to stop the packet */
     @Override
-    Boolean apply(ProxyEntityPlayerMP player, Packet packet);
+    Boolean apply(ProxyServerPlayerEntity player, Packet packet);
 }

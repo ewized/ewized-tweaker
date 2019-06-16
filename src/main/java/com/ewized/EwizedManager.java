@@ -1,13 +1,15 @@
 package com.ewized;
 
+import com.ewized.minecraft.protocol.PacketListener;
+import com.ewized.minecraft.protocol.PacketTypes;
 import com.ewized.minecraft.protocol.Packets;
 import com.ewized.minecraft.proxy.server.ProxyMinecraftServer;
-import net.year4000.utilities.reflection.Reflections;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /** This is the main class that will serve at the mod platform */
 public final class EwizedManager implements Ewized {
+    private final Logger logger = LogManager.getLogger("ewized");
     private static EwizedManager manager;
     Packets packets;
     ProxyMinecraftServer minecraftServer;
@@ -24,6 +26,14 @@ public final class EwizedManager implements Ewized {
     private EwizedManager() {
         this.packets = Packets.manager(this);
         this.minecraftServer = null;
+    }
+
+    private void test() {
+        this.logger.info("Ewized Mod Loader");
+        this.packets.registerListener(PacketTypes.PLAY_SERVER_CHAT_MESSAGE, ((player, packet) -> {
+            this.logger.info("player said something...");
+            return PacketListener.IGNORE;
+        }));
     }
 
 

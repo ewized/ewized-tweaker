@@ -4,7 +4,7 @@
 
 package com.ewized.minecraft.protocol;
 
-import com.ewized.minecraft.proxy.entity.player.ProxyEntityPlayerMP;
+import com.ewized.minecraft.proxy.entity.player.ProxyServerPlayerEntity;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Maps;
 import io.netty.channel.Channel;
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 /** The packet manager that inject packets into the netty pipeline */
 public class PacketManager implements Packets {
-    public static final AttributeKey<ProxyEntityPlayerMP> PLAYER_KEY = AttributeKey.valueOf("player");
+    public static final AttributeKey<ProxyServerPlayerEntity> PLAYER_KEY = AttributeKey.valueOf("player");
     public static final AttributeKey<PacketManager> PACKET_MANAGER_KEY = AttributeKey.valueOf("packet_manager");
     private static final Map<Class<?>, PacketManager> managers = Maps.newConcurrentMap();
     //private final Scheduler scheduler;
@@ -91,11 +91,11 @@ public class PacketManager implements Packets {
 
     /** The implementation of sending a custom packet to the player */
     @Override
-    public void sendPacket(Collection<ProxyEntityPlayerMP> players, Packet packet) {
+    public void sendPacket(Collection<ProxyServerPlayerEntity> players, Packet packet) {
         Conditions.nonNull(packet, "packet");
         Conditions.nonNull(players, "players");
         try {
-            players.stream().map(ProxyEntityPlayerMP::of).forEach(player -> player.sendPacket(packet));
+            players.stream().map(ProxyServerPlayerEntity::of).forEach(player -> player.sendPacket(packet));
         } catch (Throwable throwable) {
             ErrorReporter.builder(throwable)
                 .hideStackTrace()
@@ -110,12 +110,12 @@ public class PacketManager implements Packets {
     }
 
     @Override
-    public void sendPacket(Collection<ProxyEntityPlayerMP> players, Packet packet, long offset, TimeUnit unit) {
+    public void sendPacket(Collection<ProxyServerPlayerEntity> players, Packet packet, long offset, TimeUnit unit) {
         //scheduler.run(() -> sendPacket(players, packet), (int) offset, unit);
     }
 
     @Override
-    public void repeatPacket(Collection<ProxyEntityPlayerMP> players, Packet packet, long delay, TimeUnit unit) {
+    public void repeatPacket(Collection<ProxyServerPlayerEntity> players, Packet packet, long delay, TimeUnit unit) {
         //scheduler.repeat(() -> sendPacket(players, packet), (int) delay, unit);
     }
 
@@ -137,9 +137,9 @@ public class PacketManager implements Packets {
     /**
      * This is where we inject our custom netty handler to capture packets incoming and out going.
      */
-    public void onPlayerLogin(ProxyEntityPlayerMP playerEntity) {
+    public void onPlayerLogin(ProxyServerPlayerEntity playerEntity) {
         try {
-            //ProxyEntityPlayerMP proxy = ProxyEntityPlayerMP.of(playerEntity);
+            //ProxyServerPlayerEntity proxy = ProxyServerPlayerEntity.of(playerEntity);
             Channel channel = playerEntity.netHandlerPlayServer().networkManager().channel();
             channel.attr(PLAYER_KEY).set(playerEntity);
             channel.attr(PACKET_MANAGER_KEY).set(this);
