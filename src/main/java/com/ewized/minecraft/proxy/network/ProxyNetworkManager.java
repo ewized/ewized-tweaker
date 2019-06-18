@@ -5,12 +5,18 @@
 package com.ewized.minecraft.proxy.network;
 
 import io.netty.channel.Channel;
+import net.year4000.utilities.reflection.Gateways;
 import net.year4000.utilities.reflection.annotations.Getter;
 import net.year4000.utilities.reflection.annotations.Invoke;
 import net.year4000.utilities.reflection.annotations.Proxied;
 
 @Proxied("ja") // net.minecraft.network.NetworkManager
 public interface ProxyNetworkManager {
+
+    static ProxyNetworkManager of(Object instance) {
+        return Gateways.proxy(ProxyNetworkManager.class, instance);
+    }
+
     /** Get the object that this proxy is using */
     Object $this();
 

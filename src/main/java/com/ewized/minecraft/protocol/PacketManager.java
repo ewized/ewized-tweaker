@@ -158,4 +158,27 @@ public class PacketManager implements Packets {
                 .buildAndReport(System.err);
         }
     }
+
+    /**
+     * This is where we inject our custom netty handler to capture packets incoming and out going.
+     */
+    public void injectPacketInjector(Channel channel) {
+        try {
+            //ProxyServerPlayerEntity proxy = ProxyServerPlayerEntity.of(playerEntity);
+            channel.attr(PACKET_MANAGER_KEY).set(this);
+            ChannelPipeline pipeline = channel.pipeline();
+            if (pipeline.get(PipelineHandles.INBOUND_NAME) == null) {
+                String where = (pipeline.get("fml:packet_handler") != null) ? "fml:packet_handler" : "packet_handler";
+                pipeline.addBefore(where, PipelineHandles.INBOUND_NAME, PipelineHandles.INBOUND_HANDLER);
+            }
+            if (pipeline.get(PipelineHandles.OUTBOUND_NAME) == null) {
+                pipeline.addAfter("packet_handler", PipelineHandles.OUTBOUND_NAME, PipelineHandles.OUTBOUND_HANDLER);
+            }
+        } catch (Throwable throwable) {
+            ErrorReporter.builder(throwable)
+                    //.hideStackTrace()
+                    .add("Could not inject the packet interceptor for: ", channel) // todo print the player name and maybe the uuid
+                    .buildAndReport(System.err);
+        }
+    }
 }

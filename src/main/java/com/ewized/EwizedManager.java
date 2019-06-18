@@ -5,6 +5,8 @@ import com.ewized.minecraft.protocol.PacketManager;
 import com.ewized.minecraft.protocol.PacketTypes;
 import com.ewized.minecraft.protocol.Packets;
 import com.ewized.minecraft.proxy.server.ProxyMinecraftServer;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.epoll.EpollEventLoopGroup;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,6 +33,8 @@ public final class EwizedManager implements Ewized {
     private void test() {
         this.logger.info("Ewized Mod Loader");
         this.logger.info(this.minecraftServer);
+
+
         // todo look into the Network Manager and figure out how to hook in our PipelineHandler to auto inject player packets and such
         //((PacketManager) this.packets).onPlayerLogin(null);
         this.packets.registerListener(PacketTypes.PLAY_SERVER_CHAT_MESSAGE, ((player, packet) -> {

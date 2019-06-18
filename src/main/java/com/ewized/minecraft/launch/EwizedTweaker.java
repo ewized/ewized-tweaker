@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class  EwizedTweaker implements ITweaker {
+    private List<String> argsOriginal = new ArrayList<>();
     private List<String> args = new ArrayList<>();
     private Logger logger = LogManager.getLogger("ewized");
     private String profile = "ewized";
@@ -25,6 +26,7 @@ public class  EwizedTweaker implements ITweaker {
         this.mixinTweaker.acceptOptions(args, gameDir, assetsDir, profile);
         this.logger.log(Level.INFO, "acceptOptions");
         this.args.addAll(args);
+        this.argsOriginal.addAll(args);
         this.profile = profile;
         this.logger.log(Level.INFO, args);
         this.logger.log(Level.INFO, gameDir);

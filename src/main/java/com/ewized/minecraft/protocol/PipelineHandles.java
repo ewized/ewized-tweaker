@@ -13,6 +13,7 @@ import io.netty.channel.ChannelPromise;
 import net.year4000.utilities.ErrorReporter;
 import net.year4000.utilities.utils.UtilityConstructError;
 import net.year4000.utilities.value.Value;
+import org.apache.logging.log4j.LogManager;
 
 /** The handles for the minecraft pipeline */
 final class PipelineHandles {
